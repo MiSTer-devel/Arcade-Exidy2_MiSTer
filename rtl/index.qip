@@ -1,0 +1,7 @@
+set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) "Exidy2.v"]
+set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) "audio_board.v"]
+set_global_assignment -name SYSTEMVERILOG_FILE [file join $::quartus(qip_path) "rom_loader.sv"]
+set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) "ttl_chips.v"]
+set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) "hiscore.v"]
+set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) "pause.v"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "dpram_dc.vhd"]

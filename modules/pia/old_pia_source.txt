@@ -1,0 +1,104 @@
+/*
+pia6520 PIA_8B
+(
+	.data_out(audio_data_PIAB_out),	// cpu interface
+	.data_in(audio_databus_out),
+	.addr(audio_addrbus[1:0]),
+	.strobe(audio_addrbus[15:0]>=16'h1000&audio_addrbus[15:0]<=16'h17FF),
+	.we(!audio_nWRITE),
+
+	.irq(PIB_IRQA),
+	 
+	.porta_out(),
+	//.porta_in(audio_DI_out),
+	//.portb_out(audio_DO_in),
+	.portb_in(),
+
+	.porta_in(audio_DO_bus),
+	.portb_out(audio_DI_bus),
+	
+	.ca1_in(PIA_9B_CB2_out),
+	.ca2_out(PIA_8B_CA2_out),
+	.ca2_in(),
+	.cb1_in(PIA_9B_CA2_out),
+	.cb2_out(PIA_8B_CB2_out),
+	.cb2_in(),
+
+	.clk(audio_clk), //auPH0
+	.reset(!RESET_n)
+);
+*/
+
+
+PIA PIA_9B(
+		.CLK(master_clock),			//=> CLK,
+		.EN((CPU_addrbus[15:0]>16'h51FF&CPU_addrbus[15:0]<16'h5210)), 	//&PH_1
+		.WR_EN(!CPU_RWn), 						
+		.RESET_N(RESET_n), 		//=> RESET_N,
+
+		.CA1(PIA_8B_CB2_out),//
+		.CB1(PIA_8B_CA2_out),//
+		.CA2_OUT(PIA_9B_CA2_out),
+		.CB2_OUT(PIA_9B_CB2_out),    
+
+		//.CA2_IN(CB1),//
+		//.CB2_IN(CA1),//
+		//.CA2_DIR_OUT(CA2_DIR_OUT),
+		//.CB2_DIR_OUT(CB2_DIR_OUT),	
+		
+		.ADDR(CPU_addrbus[1:0]), 	//=> PBI_ADDR_INT(1 DOWNTO 0),  //cs?
+		.CPU_DATA_IN(CPU_databus_out),   				//=> WRITE_DATA(7 DOWNTO 0),
+		.DATA_OUT(audio_data_out), 					//=> PIA_DO,
+		
+		.IRQA_N(PIA_IRQA),			//I don't know what these do
+		.IRQB_N(PIA_IRQB),
+
+
+		.PORTA_IN(audio_DO_bus),
+		.PORTA_OUT(audio_DO_bus2),
+		
+		//.PORTB_IN(audio_DI_in),
+
+		.PORTB_OUT(audio_DI_bus),
+		.PORTB_IN(audio_DI_bus2)
+		
+		//.PORTA_DIR_OUT(PORTA_DIR_OUT),
+		//.PORTB_DIR_OUT(PORTB_DIR_OUT),
+);
+
+
+PIA PIA_8B(
+		.CLK(audio_clk),			//=> CLK,
+		.EN(!io10_17), 	//&auPH0
+		.WR_EN(!audio_nWRITE), 						
+		.RESET_N(RESET_n), 		//=> RESET_N,
+		
+		.CA1(PIA_9B_CB2_out),//
+		.CB1(PIA_9B_CA2_out),//
+		.CA2_OUT(PIA_8B_CA2_out),//
+		.CB2_OUT(PIA_8B_CB2_out),  //  
+		
+		//.CA2_IN(CA2_IN),
+		//.CB2_IN(CB2_IN),
+		//.CA2_DIR_OUT(PIA_8B_CA2_out),
+		//.CB2_DIR_OUT(PIA_8B_CB2_out),
+		
+		.ADDR(audio_addrbus[1:0]), 				//=> PBI_ADDR_INT(1 DOWNTO 0),  //cs?
+		.CPU_DATA_IN(audio_databus_out),   				//=> WRITE_DATA(7 DOWNTO 0),
+		.DATA_OUT(audio_data_PIAB_out), 					//=> PIA_DO,
+		
+		.IRQA_N(PIB_IRQA),
+		.IRQB_N(PIB_IRQB),
+		.PORTA_IN(audio_DI_bus),
+		.PORTA_OUT(audio_DI_bus2),
+		
+		.PORTB_OUT(audio_DO_bus),		
+		.PORTB_IN(audio_DO_bus2)
+
+		
+		//.PORTA_DIR_OUT(PORTA_DIR_OUT),
+		
+		
+		//.PORTB_DIR_OUT(PORTB_DIR_OUT),
+		
+);
