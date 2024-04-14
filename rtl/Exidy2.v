@@ -220,16 +220,17 @@ dpram_dc #(.widthad_a(10)) U14_RAM_2016 //SJ
 	.address_a(CPU_addrbus[9:0]),
 	.data_a(CPU_databus_out),
 	.wren_a(!CPU_RWn & !RAMSEL), 
-	.q_a(CPU_RAM_out)
+	.q_a(CPU_RAM_out),
 
-//	.clock_b(master_clock),
-//	.address_b(CPU_addrbus[9:0]),
-//	.data_b(CPU_databus_out),
-//	.wren_b(!CPU_RWn & !RAMSEL),
-//	.q_b(CPU_RAM_out)
+	.clock_b(master_clock),
+	.address_b(hs_address[9:0]),
+	.data_b(hs_data_in),
+	.wren_b(hs_write),
+	.q_b(hs_data_out)
 	
 );
 
+	
 //graphics ROM: 2708 (1K) or 2716 (2K)
 wire [7:0] MVD;
 eprom_1 U11D_gfx

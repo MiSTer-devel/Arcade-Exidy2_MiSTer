@@ -31,7 +31,7 @@
 		<part crc="1e1e3916" name="5a-ac"/>
 		<part crc="80f3357a" name="6a-ac"/>
 		<part crc="466addc7" name="7a-ac"/>
-		<part crc="b4bb2503" name="11d-cpu"/>
+		<part crc="ea6fd981" name="vel_11d-2.11d"/>
 		<part crc="43b35bb7" name="vel5c 1.c5"/>
 		<part crc="e26f9053" name="hrl6d 1.d6"/>
 		<part crc="f76b4fcf" name="hrl14h 1.h14"/>
@@ -43,4 +43,11 @@
 	<rom index="2">
 		<part>37</part>
 	</rom>	
+	<rom index="3" md5="none">
+		<part>
+			4D 80 00 00 00 FF 00 02 00 02 00 01 00 FF 02 00
+			00 00 03 80 00 23 00 53
+		</part>
+	</rom>
+	<nvram index="4" size="35"/>		
 </misterromdescription>

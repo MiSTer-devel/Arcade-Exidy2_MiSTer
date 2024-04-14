@@ -396,7 +396,7 @@ pause #(1,1,1,38) pause
 // HISCORE SYSTEM
 // --------------
 
-wire [15:0]hs_address;
+wire [9:0]hs_address;
 wire [7:0]hs_data_out;
 wire [7:0]hs_data_in;
 wire hs_write;
@@ -406,7 +406,7 @@ wire hs_pause;
 wire hs_configured;
 
 hiscore #(
-	.HS_ADDRESSWIDTH(16),
+	.HS_ADDRESSWIDTH(10),
 	.CFG_ADDRESSWIDTH(6),
 	.CFG_LENGTHWIDTH(2)
 ) hi (
